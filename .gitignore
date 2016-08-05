@@ -87,3 +87,8 @@ ENV/
 
 # Rope project settings
 .ropeproject
+
+# otokon_documents
+public/
+otokon_documents/otokon_documents/local_settings.py
+otokon_documents/db.sqlite3
