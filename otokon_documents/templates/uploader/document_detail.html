@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% block title %}Object Detail | {{ object.title }} {% endblock %}
+
+{% block content %}
+<div class="page-header">
+  <h1>{{ object.title }}</h1>
+</div>
+<dl>
+  <dt>Publish Date: </dt>
+    <dd><i class="fa fa-calendar"></i>{{ object.created }}</dd>
+  <dt>Tags: </dt>
+    <dd>
+      <i class="fa fa-tags"></i>
+      {% for tag in tag_list %}
+      <span class="label label-primary">{{ tag.name }}</span>
+      {% endfor %}
+    </dd>
+  <dt>Content: </dt>
+    <dd>{{ object.content|safe }}</dd>
+  {% if object.get_extension == "pdf" %}
+    <dt>Share Link:</dt>
+      <dd><a href ="{{ object.document.url}}">{{ object.title }}</a></dd>
+    <dt>File: </dt>
+      <dd>
+        <object data="{{ object.document.url }}" type="application/pdf" width="100%" height="540px">
+          <p>To download document <a href="{{ object.document.url }}">click here.</a></p>
+        </object>
+      </dd>
+      {% else %}
+      <dt>File: </dt>
+       <dd><a href="{{ object.document.url }}">{{ object.title }}</a></dd>
+      {% endif %}
+
+    {% if object.author == request.user or request.user.is_superuser %}
+    <div class="btn-group" style="padding-top:2%;">
+    <a href="{% url "document_update" object.slug %}" type="button" class="btn btn-info">Update Document</a>
+    <a href="{% url "document_delete" object.slug %}" type="button" class="btn btn-danger">Delete Document</a>
+  </div>
+    {% endif %}
+</dl>
+{% endblock %}
