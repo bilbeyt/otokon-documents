@@ -81,6 +81,10 @@ class DocumentUpdateView(UpdateView):
 
     @method_decorator(login_required)
     def dispatch(self, request, *args, **kwargs):
+        check = self.request.user.groups.filter(name="exclusive").exists()
+        check2 = self.request.user.is_superuser
+        if not check and not check2:
+            raise PermissionDenied
         return super(DocumentUpdateView, self).dispatch(request, *args, **kwargs)
 
     def form_valid(self, form):
@@ -96,4 +100,8 @@ class DocumentDeleteView(DeleteView):
 
     @method_decorator(login_required)
     def dispatch(self, request, *args, **kwargs):
+        check = self.request.user.groups.filter(name="exclusive").exists()
+        check2 = self.request.user.is_superuser
+        if not check and not check2:
+            raise PermissionDenied
         return super(DocumentDeleteView, self).dispatch(request, *args, **kwargs)
