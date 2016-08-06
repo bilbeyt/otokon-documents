@@ -92,3 +92,4 @@ ENV/
 public/
 otokon_documents/otokon_documents/local_settings.py
 otokon_documents/db.sqlite3
+otokon_documents/media

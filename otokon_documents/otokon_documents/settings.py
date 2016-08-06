@@ -101,8 +101,9 @@ AUTH_PASSWORD_VALIDATORS = [
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
-LOGIN_REDIRECT_URL = "/documents"
-
+from django.core.urlresolvers import reverse_lazy
+LOGIN_REDIRECT_URL = reverse_lazy("base")
+LOGIN_URL = reverse_lazy("login")
 # Internationalization
 # https://docs.djangoproject.com/en/1.10/topics/i18n/
 
