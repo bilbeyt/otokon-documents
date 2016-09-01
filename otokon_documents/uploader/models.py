@@ -36,7 +36,7 @@ class Document(models.Model):
     title = models.CharField(max_length=100)
     doc_type = models.ForeignKey(DocumentType)
     slug = models.SlugField(max_length=100)
-    content = RichTextField()
+    content = RichTextField(blank=True, null=True)
     document = models.FileField(upload_to=get_upload_path)
     tags = models.ManyToManyField(Tag)
     created = models.DateTimeField(auto_now_add=True)
